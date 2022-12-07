@@ -1,19 +1,22 @@
 
-max = 0
-elf = 0
+max = []
 
 with open('input1.txt', 'r') as f:
-    sum = 0
+    Sum = 0
     for line in f:
         cal = line.strip()
         # check if line is empyty
         if not cal.strip():
             # line is empty
-            if sum > max:
-                max = sum
-            elf += 1
-            sum = 0
+            if len(max) >= 3:
+                if max[2] < Sum:
+                    max[2] = Sum
+                    max.sort(reverse=True)
+            else:
+                max.append(Sum)
+                max.sort(reverse=True)
+            Sum = 0
         else:
-            sum += int(cal)
-    print('Max Calories: ', max)
-    print('Elf:', elf)
+            Sum += int(cal)
+    print('Top 3: ', max)
+    print('Total: ', sum(max))
